@@ -1,14 +1,22 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { Container, AppBar, Typography, Grow, Grid } from "@material-ui/core";
 
 import Posts from "./Components/Posts/Post";
 import Form from "./Components/Form/form"
+import { getPosts } from './actions/posts'
 // this is used to add styling to the material-ui component.
 import useStyles from "./styles"
+import {useDispatch} from 'react-redux'
 
 
 function App() {
+  const dispatch = useDispatch();
   const classes = useStyles();
+
+  useEffect(()=>{
+    dispatch(getPosts());
+  }, [dispatch])
+
   const MemoriesURL = "https://raw.githubusercontent.com/adrianhajdin/project_mern_memories/master/client/src/images/memories.png?token=AF56X74XONEUGZ4FD2FUIA27UURPI"
   return (
     // Container with maxWidth will act like an Fluid container
