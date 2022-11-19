@@ -28,7 +28,7 @@ const Post = ({ post }) =>{
             <Typography varient="h5" className={classes.title} gutterBottom>{post.message}</Typography>
             </CardContent>
 
-            <CardActions className={classes.CardActions}>
+            <CardActions className={classes.cardActions}>
                 <Button size="small" color="primary" onClick={()=> {}}>
                     <ThumbUpAltIcon fontSize="small"/>
                     Link
