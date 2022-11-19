@@ -25,12 +25,12 @@ function App() {
         <Typography className={classes.heading} variant='h2' align='center'>Memories</Typography>
         <img className={classes.image} src={MemoriesURL} alt="memories" height="60" /> 
       </AppBar>
-      // Grow component need an "in" argumemt to make its child component visible
+      {/* // Grow component need an "in" argumemt to make its child component visible */}
       <Grow in>
         <Container>
-          // Grid has this syntax type of thing that outer grid contain 'container' and child grid component
-          // use 'item'. Grid is '14' column layout. 
-          <Grid container justify="space-between" alignItems='stretch'spacing={3}>
+          {/* // Grid has this syntax type of thing that outer grid contain 'container' and child grid component
+          // use 'item'. Grid is '14' column layout.  */}
+          <Grid container justifyContent="space-between" alignItems='stretch'spacing={3}>
             <Grid item xs={12} sm={7}>
               <Posts></Posts>
             </Grid>

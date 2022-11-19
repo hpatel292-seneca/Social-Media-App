@@ -4,6 +4,6 @@ import { getPost, createPost } from "../controllers/posts.js";
 const router = Express.Router();
 
 router.get("/", getPost);
-router.post("/", createPost);
+router.get("/po", createPost);
 
 export default router;
