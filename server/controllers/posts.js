@@ -7,7 +7,7 @@ export const getPost = async (req, res)=>{
         console.log(posts);
         res.status(200).json(posts);
     } catch (error) {
-        res.status(404).json({message: error.message})
+        res.status(404).json({message: error.message}) 
     }
 };
 
