@@ -6,39 +6,36 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import moment from 'moment';
 
-const Post = ({ post }) =>{
+const Post = ({ post, setCurrentid }) =>{
     const classes = useStyles();
     return (
         <Card className={classes.card}>
-            <CardMedia className={classes.media} image={Post.selectedImage} title={post.title} />
+            {/* <CardMedia image={Post.selectedImage} className={classes.media} title={post.title} /> */}
+            <CardMedia className={classes.media} image={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} title={post.title} />
             <div className={classes.overlay}>
-                <Typography varient="h6">{post.creator}</Typography>
-                <Typography varient="body2">{moment(post.createdAt).fromNow()}</Typography>
+                <Typography variant="h6">{post.creator}</Typography>
+                <Typography variant="body2" className='time'>{moment(post.createdAt).fromNow()}</Typography>
             </div>
             <div className={classes.overlay2}>
-                <Button style={{color: "white"}} size="small" onClick={()=>{ }}>
-                    <MoreHorizIcon fontSize="default" />
+                <Button 
+                style={{color: "white"}} 
+                size="small" 
+                onClick={()=>{ setCurrentid(post._id) }}>
+                    <MoreHorizIcon fontSize="small" />
                 </Button>
             </div>
             <div className={classes.details}>
-            {/* <Typography varient="body2" color="textsecondary">{post.tags.map((tag) =>`#${tag} `)}</Typography> */}
+            <Typography variant="body2" color="textSecondary">{post.tags.map((tag) =>`#${tag} `)}</Typography>
             
             </div>
             <CardContent>
-            <Typography varient="h5" className={classes.title} gutterBottom>{post.message}</Typography>
+            <Typography variant="h5" className={classes.title} gutterBottom>{post.message}</Typography>
             </CardContent>
 
             <CardActions className={classes.cardActions}>
-                <Button size="small" color="primary" onClick={()=> {}}>
-                    <ThumbUpAltIcon fontSize="small"/>
-                    Link
-                    {post.likeCount}
-                </Button>
-                <Button size="small" color="primary" onClick={()=> {}}>
-                    <DeleteIcon fontSize="small"/>
-                    Delete
-                </Button>
-            </CardActions>
+        <Button size="small" color="primary" onClick={() => {}}><ThumbUpAltIcon fontSize="small" /> Like {post.likeCount} </Button>
+        <Button size="small" color="primary" onClick={() => {}}><DeleteIcon fontSize="small" /> Delete</Button>
+      </CardActions>
         </Card>
     );
 }

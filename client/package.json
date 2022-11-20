@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://hpatel292-seneca-opulent-orbit-wq5wpxxjjgr35r76-5000.preview.app.github.dev/posts",
+  "proxy": "http://localhost:5000/posts",
   "dependencies": {
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.3",
