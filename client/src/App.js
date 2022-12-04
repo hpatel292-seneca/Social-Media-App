@@ -1,47 +1,33 @@
-import React, {useState, useEffect} from 'react'
-import { Container, AppBar, Typography, Grow, Grid } from "@material-ui/core";
+import { Container} from "@material-ui/core";
 
-import Posts from "./Components/Posts/Post";
-import Form from "./Components/Form/form"
-import { getPosts } from './actions/posts'
-// this is used to add styling to the material-ui component.
-import useStyles from "./styles"
-import {useDispatch} from 'react-redux'
+import NavBar from './Components/navBar/navBar';
+import {BrowserRouter, Route, Navigate} from 'react-router-dom'
+import {Routes} from 'react-router';
+import Home from './Components/Home/home';
+import Auth from './Components/Auth/Auth';
+import postDetails from "./Components/PostDetails/postDetails";
 
 
 
 function App() {
-  const [currentid, setCurrentid] = useState(null);
-  const dispatch = useDispatch();
-  const classes = useStyles();
-
-  useEffect(()=>{
-    dispatch(getPosts());
-  }, [dispatch])
-
-  const MemoriesURL = "https://raw.githubusercontent.com/adrianhajdin/project_mern_memories/master/client/src/images/memories.png?token=AF56X74XONEUGZ4FD2FUIA27UURPI"
+  let user =   JSON.parse(localStorage.getItem("profile"));
+  
   return (
     // Container with maxWidth will act like an Fluid container
-    <Container maxWidth="lg">
-      <AppBar className={classes.appBar} position= "static" color= "inherit">
-        <Typography className={classes.heading} variant='h2' align='center'>Memories</Typography>
-        <img className={classes.image} src={MemoriesURL} alt="memories" height="60" /> 
-      </AppBar>
+    <Container maxWidth="xl">
+      <BrowserRouter>
+      <NavBar />
+         <Routes>
+          <Route path="/" element={<Navigate to="/posts" replace/>}/>
+          <Route path="/posts" element= {<Home />}/>
+          <Route path="/posts/search" element= {<Home />}/>
+          <Route path="/posts/:id" element= {<postDetails />}/>
+          <Route path="/Auth" element={!user? <Auth /> : <Navigate to="/posts" replace/>} /> 
+        </Routes>
+      </BrowserRouter>
+      {/* <Home />
       {/* // Grow component need an "in" argumemt to make its child component visible */}
-      <Grow in>
-        <Container>
-          {/* // Grid has this syntax type of thing that outer grid contain 'container' and child grid component
-          // use 'item'. Grid is '14' column layout.  */}
-          <Grid container justifyContent="space-between" alignItems='stretch'spacing={3}>
-            <Grid item xs={12} sm={7}>
-              <Posts setCurrentid = {setCurrentid}></Posts>
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <Form currentid = {currentid} setCurrentid = {setCurrentid}></Form>
-            </Grid>
-          </Grid>
-        </Container>
-      </Grow>
+      
     </Container>
   );
 }
