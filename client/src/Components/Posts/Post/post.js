@@ -8,6 +8,7 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { deletePost, likePost } from '../../../actions/posts';
+import { Link } from 'react-router-dom'
 
 
 const Post = ({ post, setCurrentid }) =>{
@@ -29,9 +30,9 @@ const Post = ({ post, setCurrentid }) =>{
       };
 
     return (
-        <Card className={classes.card}>
+        <Card className={classes.card} elevation={6} raised>
             {/* <CardMedia image={Post.selectedImage} className={classes.media} title={post.title} /> */}
-            <CardMedia className={classes.media} image={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} title={post.title} />
+            <CardMedia component={Link} to={`/posts/${post._id}`} className={classes.media} image={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} title={post.title} />
             <div className={classes.overlay}>
                 <Typography variant="h6">{post.name}</Typography>
                 <Typography variant="body2" className='time'>{moment(post.createdAt).fromNow()}</Typography>
@@ -46,7 +47,7 @@ const Post = ({ post, setCurrentid }) =>{
             style={{ color: 'white' }}
             size="small"
           >
-            <MoreHorizIcon fontSize="default" />
+            <MoreHorizIcon fontSize="medium" />
           </Button>
         </div>
         )}
@@ -56,7 +57,7 @@ const Post = ({ post, setCurrentid }) =>{
             </div>
             <Typography variant="h5" className={classes.title} gutterBottom>{post.title}</Typography>
             <CardContent>
-            <Typography variant="body2" color='textSecondary' gutterBottom component="p">{post.message}</Typography>
+            <Typography variant="body2" color='textSecondary' gutterBottom component="p">{post.message.split(' ').splice(0, 15).join(' ')}...</Typography>
             </CardContent>
 
             <CardActions className={classes.cardActions}>

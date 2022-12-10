@@ -22,7 +22,7 @@ function Home() {
     const searchQuery = query.get("searchQuery");
     const [currentid, setCurrentId] = useState(null);
     const [search, setSearch] = useState("");
-    const [tags, setTags] = useState([""]);
+    const [tags, setTags] = useState([]);
     const classes = useStyles();
     const dispatch = useDispatch();
 
@@ -41,19 +41,19 @@ function Home() {
   const handleDelete = (deletedTag) => setTags(tags.filter((tag)=> tag !== deletedTag));
 
   const searchPost = () => {
-    if(search.trim()){
+    if(search[0] || tags){
       //dispatch -> get search post
-      // dispatch({type:"searchPost", payload: {search, tags: tags.join(",")}});
       dispatch(getPostBySearch({search, tags: tags.join(",")}));
+      navigate(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(",")}`);
     } else{
       navigate("/");
     }
   }
   return (
     // <div>Home</div>
-    <Grow in>
-        <Container>
-          <Grid className={classes.Main_Container} container justifyContent="space-between" alignItems='stretch'spacing={3} fullWidth>
+    <Grow in >
+        <Container maxWidth="xl">
+          <Grid className={classes.Main_Container} container justifyContent="space-between" alignItems='stretch'spacing={3}>
             <Grid item xs={12} sm={6} md={9}>
               <Posts setCurrentid = {setCurrentId}></Posts>
             </Grid>
@@ -66,7 +66,7 @@ function Home() {
                 variant="outlined"
                 label="Search Memories"
                 onKeyPress={handlekeyPress}
-                fullWidth
+                
               />
               <ChipInput 
                 style={{margin: '10px 0'}}

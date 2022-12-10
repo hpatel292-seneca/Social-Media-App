@@ -2,15 +2,19 @@ import PostMessage from "../models/postMessage.js";
 import mongoose from "mongoose";
 
 export const getPostBySearch = async(req, res) => {
+    const {search, tags} = req.query;
     try{
-        const query = req.query;
-        console.log(query);
+        const title  = search[0]? new RegExp(search, 'i'): undefined;
+        // console.log(query);
+        const posts = await PostMessage.find({ $or: [ { title }, { tags: { $in: tags.split(',') } } ]});
+        // console.log(posts);
+        res.status(200).json(posts);
     }catch(err){
-        console.log(err);
+        res.status(404).json(err);
     }
 }
 
-export const getPost = async (req, res)=>{
+export const getPosts = async (req, res)=>{
     // it is better to use try and catch over here as an the model can give eror back
     try {
         const posts = await PostMessage.find();
@@ -21,9 +25,23 @@ export const getPost = async (req, res)=>{
     }
 };
 
+export const getPost = async (req, res)=>{
+
+    const {id} = req.params;
+
+    // it is better to use try and catch over here as an the model can give eror back
+    try {
+        const posts = await PostMessage.findById(id);
+        // console.log(posts);
+        res.status(200).json(posts);
+    } catch (error) {
+        res.status(404).json({message: error.message}) 
+    }
+};
+
 export const createPost = async (req, res)=>{
     // console.log(req.body);
-    console.log(req.Id);
+    // console.log(req.Id);
     let post = req.body;
     const aa = {...post, creator: req.userId, createdAt: new Date().toISOString()}
     const newPost = new PostMessage(aa);

@@ -7,7 +7,7 @@ import { createPost, updatePost } from '../../actions/posts';
 import { useSelector } from 'react-redux';
 import { getPosts } from '../../actions/posts';
 const Form = ({currentid, setCurrentid}) =>{
-  let post = useSelector((state)=> currentid? state.posts.find((p)=> p._id === currentid) : null );
+  let post = useSelector((state)=> currentid? state.posts.posts.find((p)=> p._id === currentid) : null );
   let user =   JSON.parse(localStorage.getItem("profile"));
     const dispatch = useDispatch();
     const [postData, setPostData] = useState({ 

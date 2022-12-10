@@ -5,8 +5,8 @@ import {BrowserRouter, Route, Navigate} from 'react-router-dom'
 import {Routes} from 'react-router';
 import Home from './Components/Home/home';
 import Auth from './Components/Auth/Auth';
-import postDetails from "./Components/PostDetails/postDetails";
-
+import PostDetails from './Components/PostDetails/postDetails'
+import NoMatch from "./Components/noMatch/noMatch";
 
 
 function App() {
@@ -20,9 +20,11 @@ function App() {
          <Routes>
           <Route path="/" element={<Navigate to="/posts" replace/>}/>
           <Route path="/posts" element= {<Home />}/>
-          <Route path="/posts/search" element= {<Home />}/>
-          <Route path="/posts/:id" element= {<postDetails />}/>
+          <Route path="/posts/search" exact element= {<Home />}/>
+          {/* <Route path="/posts/:id" element= {<postDetails />}/> */}
+          <Route path="/posts/:id" exact element={<PostDetails />} />
           <Route path="/Auth" element={!user? <Auth /> : <Navigate to="/posts" replace/>} /> 
+          <Route path="*" element={<NoMatch />} />
         </Routes>
       </BrowserRouter>
       {/* <Home />
