@@ -73,13 +73,13 @@ function Auth() {
               isSignup && (
                 <>
                   <Input name="firstname" label="First Name" handleChange={handleChange} autoFocus half />
-                  <Input name="lastname" label="First Name" handleChange={handleChange} half />
+                  <Input name="lastname" label="Last Name" handleChange={handleChange} half />
                 </>
               )
             }
             <Input name="email" label="Email Address" handleChange={handleChange} type="email" />
-            <Input name="password" label="password" handleChange={handleChange} type={showpassword? "text" : "password"} handleShowPassword={handleShowPassword}/>
-            {isSignup && <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password"/>}
+            <Input name="password" label="Password" handleChange={handleChange} type={showpassword? "text" : "password"} handleShowPassword={handleShowPassword}/>
+            {isSignup && <Input name="confirmPassword" label="Re-Type Password" handleChange={handleChange} type="password"/>}
             <Button type='submit' fullWidth variant='contained' color="primary" className={classes.submit}>
               {isSignup? "Sign Up" : "Sign In"}
             </Button>
